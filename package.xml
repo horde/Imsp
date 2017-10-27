@@ -11,7 +11,7 @@
   <email>mrubinsk@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2017-10-17</date>
+ <date>2017-10-27</date>
  <version>
   <release>2.0.11</release>
   <api>1.0.0</api>
@@ -25,6 +25,13 @@
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
+   <dir name="doc">
+    <dir name="Horde">
+     <dir name="Imsp">
+      <file name="CHANGES" role="doc" />
+     </dir> <!-- /doc/Horde/Imsp -->
+    </dir> <!-- /doc/Horde -->
+   </dir> <!-- /doc -->
    <dir name="lib">
     <dir name="Horde">
      <dir name="Imsp">
@@ -334,6 +341,7 @@
  </dependencies>
  <phprelease>
   <filelist>
+   <install as="CHANGES" name="doc/Horde/Imsp/CHANGES" />
    <install as="Horde/Imsp/Auth/Base.php" name="lib/Horde/Imsp/Auth/Base.php" />
    <install as="Horde/Imsp/Auth/CramMd5.php" name="lib/Horde/Imsp/Auth/CramMd5.php" />
    <install as="Horde/Imsp/Auth/Imtest.php" name="lib/Horde/Imsp/Auth/Imtest.php" />
@@ -875,7 +883,7 @@
    <stability>
     <release>stable</release>
     <api>stable</api></stability>
-   <date>2017-10-17</date>
+   <date>2017-10-27</date>
    <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
    <notes>
    </notes>
