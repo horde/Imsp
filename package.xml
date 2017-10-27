@@ -453,7 +453,7 @@
    <date>2004-02-05</date>
    <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
    <notes>
-Initial packaging and release of code
+* Initial packaging and release of code
    </notes>
   </release>
   <release>
@@ -468,7 +468,7 @@ Initial packaging and release of code
    <date>2005-02-06</date>
    <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
    <notes>
-Bug fix for addressbook names containing spaces
+* Bug fix for addressbook names containing spaces
    </notes>
   </release>
   <release>
@@ -483,7 +483,7 @@ Bug fix for addressbook names containing spaces
    <date>2005-02-23</date>
    <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
    <notes>
-Added support for authentication using mtest for Cyrus IMAP
+* Added support for authentication using mtest for Cyrus IMAP
    </notes>
   </release>
   <release>
@@ -498,9 +498,9 @@ Added support for authentication using mtest for Cyrus IMAP
    <date>2005-04-12</date>
    <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
    <notes>
-Support for automatically creating a user&apos;s default addressbook and
-functions added to the Net_IMSP_Utils class for easily adding and deleting
-addressbook.
+* Support for automatically creating a user&apos;s default addressbook and
+* functions added to the Net_IMSP_Utils class for easily adding and deleting
+* addressbook.
    </notes>
   </release>
   <release>
@@ -515,7 +515,7 @@ addressbook.
    <date>2006-01-01</date>
    <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
    <notes>
-Suport for using Horde_Share added.
+* Suport for using Horde_Share added.
    </notes>
   </release>
   <release>
@@ -530,7 +530,7 @@ Suport for using Horde_Share added.
    <date>2010-10-22</date>
    <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
    <notes>
-Converted to package.xml 2.0 for pear.horde.org
+* Converted to package.xml 2.0 for pear.horde.org
    </notes>
   </release>
   <release>
