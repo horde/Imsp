@@ -1,0 +1,228 @@
+-----------
+v2.0.11-git
+-----------
+
+
+-------
+v2.0.10
+-------
+
+[jan] Mark PHP 7 as supported.
+
+
+------
+v2.0.9
+------
+
+[jan] Update Greek translation (Limperis Antonis <limperis@cti.gr>).
+
+
+------
+v2.0.8
+------
+
+[jan] Updated UK translation.
+
+
+------
+v2.0.7
+------
+
+[jan] Fix issues with certain locales like Turkish.
+
+
+------
+v2.0.6
+------
+
+[jan] Support loading translations from Composer-installed package.
+[jan] Add Composer definition.
+
+
+------
+v2.0.5
+------
+
+[mjr] Re-release due to a broken tar archive.
+
+
+------
+v2.0.4
+------
+
+[mjr] Fix some undefined constant errors.
+
+
+------
+v2.0.3
+------
+
+[jan] Update French translation (Paul De Vlieger
+      <paul.de_vlieger@moniut.univ-bpclermont.fr>).
+
+
+------
+v2.0.2
+------
+
+[jan] Update Basque translation (Ibon Igartua <ibon.igartua@ehu.es>).
+
+
+------
+v2.0.1
+------
+
+[jan] Update Dutch translation (Arjen de Korte <build+horde@de-korte.org>).
+
+
+------
+v2.0.0
+------
+
+First stable release for Horde 5.
+
+
+-----------
+v2.0.0beta1
+-----------
+
+First beta release for Horde 5.
+[jan] Fix finding locale directory if installed with PEAR.
+
+
+------------
+v2.0.0alpha1
+------------
+
+First alpha release for Horde 5.
+
+
+------
+v1.0.6
+------
+
+[jan] Update Japanese translation (Hiromi Kimura <hiromi@tac.tsukuba.ac.jp>).
+
+
+------
+v1.0.5
+------
+
+[jan] Update Estonian translation.
+[jan] Update Croatian translation.
+
+
+------
+v1.0.4
+------
+
+[jan] Fix file names for plaintext and imtest authentication drivers.
+
+
+------
+v1.0.3
+------
+
+[jan] Update Latvian translation.
+
+
+------
+v1.0.2
+------
+
+[jan] Update Lithuanian translation.
+[jan] Update Brazilian Portuguese translation.
+
+
+------
+v1.0.1
+------
+
+[jan] Updated Spanish translation.
+
+
+------
+v1.0.0
+------
+
+First stable release for Horde 4.
+
+
+---------
+v1.0.0RC2
+---------
+
+Second release candidate for Horde 4.
+
+
+---------
+v1.0.0RC1
+---------
+
+First release candidate for Horde 4.
+[mjr] Refactor for Horde 4.
+
+
+-----------
+v1.0.0beta1
+-----------
+
+First beta release for Horde 4.
+
+
+------------
+v1.0.0alpha2
+------------
+
+Fix package layout.
+
+
+------------
+v1.0.0alpha1
+------------
+
+First alpha release for Horde 4.
+
+
+------
+v0.0.6
+------
+
+Converted to package.xml 2.0 for pear.horde.org
+
+
+------
+v0.0.5
+------
+
+Suport for using Horde_Share added.
+
+
+------
+v0.0.4
+------
+
+Support for automatically creating a user's default addressbook and
+functions added to the Net_IMSP_Utils class for easily adding and deleting
+addressbook.
+
+
+------
+v0.0.3
+------
+
+Added support for authentication using mtest for Cyrus IMAP
+
+
+------
+v0.0.2
+------
+
+Bug fix for addressbook names containing spaces
+
+
+------
+v0.0.1
+------
+
+Initial packaging and release of code
