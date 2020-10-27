@@ -1,7 +1,7 @@
 {
     "name": "horde/imsp",
     "description": "IMSP client library",
-    "type": "library",
+    "type": "horde-library",
     "homepage": "https://www.horde.org/libraries/Horde_Imsp",
     "license": "LGPL-2.1",
     "authors": [
@@ -12,22 +12,20 @@
         }
     ],
     "version": "2.0.11",
-    "time": "2017-11-11",
+    "time": "2020-10-27",
     "repositories": [
         {
-            "type": "pear",
-            "url": "https://pear.horde.org"
+            "type": "composer",
+            "url": "https://horde-satis.maintaina.com"
         }
     ],
     "require": {
+        "horde/horde-installer-plugin": "dev-master",
         "php": "^5.3 || ^7",
-        "pear-pear.horde.org/Horde_Translation": "^2.2",
-        "pear-pear.horde.org/Horde_Util": "^2"
+        "horde/translation": "dev-master",
+        "horde/util": "dev-master"
     },
-    "replace": {
-        "pear-pear.horde.org/Horde_Imsp": "2.*",
-        "pear-horde/Horde_Imsp": "2.*"
-    },
+    "suggest": {},
     "autoload": {
         "psr-0": {
             "Horde_Imsp": "lib/"
