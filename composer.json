@@ -14,19 +14,13 @@
     "version": "2.0.11",
     "time": "2017-11-14",
     "repositories": [
-        {
-            "type": "pear",
-            "url": "https://pear.horde.org"
-        }
     ],
     "require": {
         "php": "^5.3 || ^7",
-        "pear-pear.horde.org/Horde_Translation": "^2.2",
-        "pear-pear.horde.org/Horde_Util": "^2"
+        "horde/translation": "^2.2",
+        "horde/util": "^2"
     },
     "replace": {
-        "pear-pear.horde.org/Horde_Imsp": "2.*",
-        "pear-horde/Horde_Imsp": "2.*"
     },
     "autoload": {
         "psr-0": {
