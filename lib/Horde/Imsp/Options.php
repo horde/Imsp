@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Horde_Imsp_Options Class - provides an interface to IMSP server-based
  * options storage.
@@ -51,7 +52,7 @@ class Horde_Imsp_Options
      */
     public function get($option)
     {
-        $options = array();
+        $options = [];
         $this->_imsp->send("GET $option", true, true);
         $server_response = $this->_imsp->receive();
         while (preg_match("/^\* OPTION/", $server_response)) {

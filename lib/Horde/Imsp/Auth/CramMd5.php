@@ -1,4 +1,5 @@
 <?php
+
 /**
  * IMSP authentication class for CRAM-MD5 authentication.
  *
@@ -93,9 +94,9 @@ class Horde_Imsp_Auth_CramMd5 extends Horde_Imsp_Auth_Base
      *
      * @return string the type of this IMSP_Auth driver
      */
-     public function getDriverType()
-     {
-         return 'cram_md5';
-     }
+    public function getDriverType()
+    {
+        return 'cram_md5';
+    }
 
 }

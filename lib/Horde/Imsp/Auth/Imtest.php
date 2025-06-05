@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2005-2007      Liam Hoekenga <liamr@umich.edu>
  * Copyright 2003-2017 Horde LLC (http://www.horde.org/)
@@ -41,17 +42,17 @@ class Horde_Imsp_Auth_Imtest extends Horde_Imsp_Auth_Base
         $error_return = '';
         if (Horde_String::lower($this->_params['auth_mechanism']) == 'gssapi' &&
             isset($_SERVER['KRB5CCNAME'])) {
-                $command .= 'KRB5CCNAME=' . $_SERVER['KRB5CCNAME'];
+            $command .= 'KRB5CCNAME=' . $_SERVER['KRB5CCNAME'];
         }
 
-        $command .= ' '    . $this->_params['command'].
+        $command .= ' ' . $this->_params['command'] .
                     ' -m ' . $this->_params['auth_mechanism'] .
                     ' -u ' . escapeshellarg($this->_params['username']) .
                     ' -a ' . escapeshellarg($this->_params['username']) .
-                    ' -w ' . escapeshellarg($this->_params['password']).
+                    ' -w ' . escapeshellarg($this->_params['password']) .
                     ' -p ' . $this->_params['port'] .
                     ' -X ' . $this->_params['socket'] .
-                    ' '    . $this->_params['server'];
+                    ' ' . $this->_params['server'];
 
         $conn_attempts = 0;
         while ($conn_attempts++ < 4) {
@@ -69,7 +70,9 @@ class Horde_Imsp_Auth_Imtest extends Horde_Imsp_Auth_Base
             }
             $fp = @fsockopen($this->_params['socket'], 0, $error_number, $error_string, 30);
             $error_return = $error_string;
-            if ($fp) break;
+            if ($fp) {
+                break;
+            }
             unlink($this->_params['socket']);
 
         }

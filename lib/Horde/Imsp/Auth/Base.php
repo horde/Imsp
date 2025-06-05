@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Abstract IMSP authentication class.
  *
@@ -18,7 +19,7 @@
  */
 abstract class Horde_Imsp_Auth_Base
 {
-    protected $_params = array();
+    protected $_params = [];
 
     /**
      * Class variable to hold the resulting Horde_Imsp object
@@ -32,7 +33,7 @@ abstract class Horde_Imsp_Auth_Base
      *
      * @param array $params
      */
-    public function __construct(array $params = array())
+    public function __construct(array $params = [])
     {
         $this->_params = $params;
     }
@@ -48,7 +49,7 @@ abstract class Horde_Imsp_Auth_Base
     public function authenticate(Horde_Imsp_Client_Base $client, $login = true)
     {
         $this->_imsp = $client;
-        if(!$this->_authenticate()) {
+        if (!$this->_authenticate()) {
             return false;
         }
         if (!$login) {

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package Horde_Imsp
  *

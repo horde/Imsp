@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The Horde_Imsp_Exception class
  *
@@ -10,6 +11,4 @@
  * @author  Michael Rubinsky <mrubinsk@horde.org>
  * @package Horde_Imsp
  */
-class Horde_Imsp_Exception extends Horde_Exception_Wrapped
-{
-}
+class Horde_Imsp_Exception extends Horde_Exception_Wrapped {}

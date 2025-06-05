@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Horde_Imsp_Book Class - provides api for dealing with IMSP
  * address books.
@@ -17,7 +18,7 @@ class Horde_Imsp_Book
      * Supported ACLs
      *
      */
-    const ACL_RIGHTS = 'lrwcda';
+    public const ACL_RIGHTS = 'lrwcda';
 
     /**
      * Sort order.
@@ -66,7 +67,7 @@ class Horde_Imsp_Book
         /* Iterate through the response and populate an array of
          * address book names. */
         $server_response = $this->_imsp->receive();
-        $abooks = array();
+        $abooks = [];
         while (preg_match("/^\* ADDRESSBOOK/", $server_response)) {
             /* If this is an ADDRESSBOOK response, then this will explode as so:
              * [0] and [1] can be discarded
@@ -86,7 +87,7 @@ class Horde_Imsp_Book
                 $numParts = count($parts);
                 $name = $parts[4];
                 $firstChar = substr($name, 0, 1);
-                if ($firstChar =="\"") {
+                if ($firstChar == "\"") {
                     $name = ltrim($name, "\"");
                     for ($i = 5; $i < $numParts; $i++) {
                         $name .= ' ' . $parts[$i];
@@ -125,7 +126,7 @@ class Horde_Imsp_Book
     public function search($abook, $search)
     {
         //If no field => value pairs, assume we are searching name.
-        $criteria = array();
+        $criteria = [];
         if (!is_array($search)) {
             $criteria['name'] = $search;
         } else {
@@ -161,7 +162,7 @@ class Horde_Imsp_Book
 
         // Get the response.
         $server_response = $this->_imsp->receive();
-        $abookNames = array();
+        $abookNames = [];
 
         while (preg_match("/^\* SEARCHADDRESS/", $server_response)) {
             $chopped_response = preg_replace("/^\* SEARCHADDRESS/", '', $server_response);
@@ -188,12 +189,12 @@ class Horde_Imsp_Book
 
         // Should check for OK or BAD here just to be certain.
         switch ($server_response) {
-        case 'BAD':
-            $this->_imsp->_logger->err('The IMSP server did not understand your request:' . $command_text);
-            throw new Horde_Imsp_Exception('The IMSP server did not understand your request: ' . $command_text);
-        case 'NO':
-            $this->_imsp->_logger->err('IMSP server is unable to perform your request: ' . $this->_imsp->lastRawError);
-            throw new Horde_Imsp_Exception('IMSP server is unable to perform your request: ' . $this->_imsp->lastRawError);
+            case 'BAD':
+                $this->_imsp->_logger->err('The IMSP server did not understand your request:' . $command_text);
+                throw new Horde_Imsp_Exception('The IMSP server did not understand your request: ' . $command_text);
+            case 'NO':
+                $this->_imsp->_logger->err('IMSP server is unable to perform your request: ' . $this->_imsp->lastRawError);
+                throw new Horde_Imsp_Exception('IMSP server is unable to perform your request: ' . $this->_imsp->lastRawError);
         }
 
         /* This allows for no results */
@@ -205,13 +206,13 @@ class Horde_Imsp_Book
 
         // Determine the sort direction and perform the sort.
         switch ($this->sort) {
-        case 'ascend':
-            sort($abookNames);
-            break;
+            case 'ascend':
+                sort($abookNames);
+                break;
 
-        case 'descend':
-            rsort($abookNames);
-            break;
+            case 'descend':
+                rsort($abookNames);
+                break;
         }
 
         return $abookNames;
@@ -246,11 +247,11 @@ class Horde_Imsp_Book
 
         $server_response = $this->_imsp->receive();
         switch ($server_response) {
-        case 'BAD':
-            $this->_imsp->_logger->err('The IMSP server did not understand your request.');
-            throw new Horde_Imsp_Exception('The IMSP server did not understand your request');
-        case 'NO':
-            throw new Horde_Exception_NotFound('No entry in this address book matches your query.');
+            case 'BAD':
+                $this->_imsp->_logger->err('The IMSP server did not understand your request.');
+                throw new Horde_Imsp_Exception('The IMSP server did not understand your request');
+            case 'NO':
+                throw new Horde_Exception_NotFound('No entry in this address book matches your query.');
         }
 
         // Get the data in an associative array.
@@ -288,20 +289,20 @@ class Horde_Imsp_Book
 
         $server_response = $this->_imsp->receive();
         switch ($server_response) {
-        case 'OK':
-            $this->_imsp->_logger->debug('CREATEADDRESSBOOK completed OK');
-            break;
-        case 'NO':
-            // Could not create abook.
-            $this->_imsp->_logger->err('IMSP server is unable to perform your request.');
-            throw new Horde_Imsp_Exception('IMSP server is unable to perform your request.');
-        case 'BAD':
-            $this->_imsp->_logger->err('The IMSP server did not understand your request.');
-            throw new Horde_Imsp_Exception('The IMSP server did not understand your request.');
-        default:
-            // Something unexpected.
-            $this->_imsp->_logger->err('Did not receive the expected response from the server.');
-            throw new Horde_Imsp_Exception('Did not receive the expected response from the server.');
+            case 'OK':
+                $this->_imsp->_logger->debug('CREATEADDRESSBOOK completed OK');
+                break;
+            case 'NO':
+                // Could not create abook.
+                $this->_imsp->_logger->err('IMSP server is unable to perform your request.');
+                throw new Horde_Imsp_Exception('IMSP server is unable to perform your request.');
+            case 'BAD':
+                $this->_imsp->_logger->err('The IMSP server did not understand your request.');
+                throw new Horde_Imsp_Exception('The IMSP server did not understand your request.');
+            default:
+                // Something unexpected.
+                $this->_imsp->_logger->err('Did not receive the expected response from the server.');
+                throw new Horde_Imsp_Exception('Did not receive the expected response from the server.');
         }
     }
 
@@ -326,20 +327,20 @@ class Horde_Imsp_Book
         }
         $server_response = $this->_imsp->receive();
         switch ($server_response) {
-        case 'OK':
-            $this->_imsp->_logger->debug('DELETEADDRESSBOOK completed OK');
-            break;
-        case 'NO':
-            // Could not create abook.
-            $this->_imsp->_logger->err('IMSP server is unable to perform your request.');
-            throw new Horde_Imsp_Exception('IMSP server is unable to perform your request.');
-        case 'BAD':
-            $this->_imsp->_logger->err('The IMSP server did not understand your request.');
-            throw new Horde_Imsp_Exception('The IMSP server did not understand your request.');
-        default:
-            // Something unexpected.
-            $this->_imsp->_logger->err('Did not receive the expected response from the server.');
-            throw new Horde_Imsp_Exception('Did not receive the expected response from the server.');
+            case 'OK':
+                $this->_imsp->_logger->debug('DELETEADDRESSBOOK completed OK');
+                break;
+            case 'NO':
+                // Could not create abook.
+                $this->_imsp->_logger->err('IMSP server is unable to perform your request.');
+                throw new Horde_Imsp_Exception('IMSP server is unable to perform your request.');
+            case 'BAD':
+                $this->_imsp->_logger->err('The IMSP server did not understand your request.');
+                throw new Horde_Imsp_Exception('The IMSP server did not understand your request.');
+            default:
+                // Something unexpected.
+                $this->_imsp->_logger->err('Did not receive the expected response from the server.');
+                throw new Horde_Imsp_Exception('Did not receive the expected response from the server.');
         }
     }
 
@@ -371,20 +372,20 @@ class Horde_Imsp_Book
         // Get server response.
         $server_response = $this->_imsp->receive();
         switch ($server_response) {
-        case 'NO':
-            // Could not create abook.
-            $this->_imsp->_logger->err('IMSP server is unable to perform your request.');
-            throw new Horde_Imsp_Exception('IMSP server is unable to perform your request.');
-        case 'BAD':
-            $this->_imsp->_logger->err('The IMSP server did not understand your request.');
-            throw new Horde_Imsp_Exception('The IMSP server did not understand your request.');
-        case 'OK':
-            $this->_imsp->_logger->debug("Address book $abookOldName successfully changed to $abookNewName");
-            break;
-        default:
-            // Something unexpected.
-            $this->_imsp->_logger->err('Did not receive the expected response from the server.');
-            throw new Horde_Imsp_Exception('Did not receive the expected response from the server.');
+            case 'NO':
+                // Could not create abook.
+                $this->_imsp->_logger->err('IMSP server is unable to perform your request.');
+                throw new Horde_Imsp_Exception('IMSP server is unable to perform your request.');
+            case 'BAD':
+                $this->_imsp->_logger->err('The IMSP server did not understand your request.');
+                throw new Horde_Imsp_Exception('The IMSP server did not understand your request.');
+            case 'OK':
+                $this->_imsp->_logger->debug("Address book $abookOldName successfully changed to $abookNewName");
+                break;
+            default:
+                // Something unexpected.
+                $this->_imsp->_logger->err('Did not receive the expected response from the server.');
+                throw new Horde_Imsp_Exception('Did not receive the expected response from the server.');
         }
     }
 
@@ -442,7 +443,7 @@ class Horde_Imsp_Book
                     $this->_imsp->send($command_text, false, true);
                     $server_response = $this->_imsp->receive();
                     $command_text = '';
-                    if (!preg_match("/^\+/",  $server_response)) {
+                    if (!preg_match("/^\+/", $server_response)) {
                         $this->_imsp->_logger->err('Did not receive the expected response from the server.');
                         throw new Horde_Imsp_Exception('Did not receive the expected response from the server.');
                     }
@@ -460,13 +461,13 @@ class Horde_Imsp_Book
         $server_response = $this->_imsp->receive();
 
         switch ($server_response) {
-        case 'NO':
-            // Could not create abook.
-            $this->_imsp->_logger->err('IMSP server is unable to perform your request.');
-            throw new Horde_Imsp_Exception('IMSP server is unable to perform your request.');
-        case 'BAD':
-            $this->_imsp->_logger->err('The IMSP server did not understand your request.');
-            throw new Horde_Imsp_Exception('The IMSP server did not understand your request.');
+            case 'NO':
+                // Could not create abook.
+                $this->_imsp->_logger->err('IMSP server is unable to perform your request.');
+                throw new Horde_Imsp_Exception('IMSP server is unable to perform your request.');
+            case 'BAD':
+                $this->_imsp->_logger->err('The IMSP server did not understand your request.');
+                throw new Horde_Imsp_Exception('The IMSP server did not understand your request.');
         }
 
         if ($server_response != 'OK') {
@@ -475,18 +476,18 @@ class Horde_Imsp_Book
             $dummy_array = $this->_parseFetchAddressResponse($server_response);
             $server_response = $this->_imsp->receive();
             switch ($server_response) {
-            case 'NO':
-                // Could not create abook.
-                $this->_imsp->_logger->err('IMSP server is unable to perform your request.');
-                throw new Horde_Imsp_Exception('IMSP server is unable to perform your request.');
-            case 'BAD':
-                $this->_imsp->_logger->err('The IMSP server did not understand your request.');
-                throw new Horde_Imsp_Exception('The IMSP server did not understand your request.');
-            case 'OK':
-                $this->_imsp->_logger->debug('STOREADDRESS Completed successfully.');
+                case 'NO':
+                    // Could not create abook.
+                    $this->_imsp->_logger->err('IMSP server is unable to perform your request.');
+                    throw new Horde_Imsp_Exception('IMSP server is unable to perform your request.');
+                case 'BAD':
+                    $this->_imsp->_logger->err('The IMSP server did not understand your request.');
+                    throw new Horde_Imsp_Exception('The IMSP server did not understand your request.');
+                case 'OK':
+                    $this->_imsp->_logger->debug('STOREADDRESS Completed successfully.');
 
-                //we were successful...so release the lock on the entry
-                $this->unlockEntry($abook, $entryInfo['name']);
+                    //we were successful...so release the lock on the entry
+                    $this->unlockEntry($abook, $entryInfo['name']);
             }
         }
     }
@@ -520,15 +521,15 @@ class Horde_Imsp_Book
         $this->_imsp->send($bookEntry, false, true);
         $server_response = $this->_imsp->receive();
         switch ($server_response) {
-        case 'NO':
-            // Could not create abook.
-            $this->_imsp->_logger->err('IMSP server is unable to perform your request.');
-            throw new Horde_Imsp_Exception('IMSP server is unable to perform your request.');
-        case 'BAD':
-            $this->_imsp->_logger->err('The IMSP server did not understand your request.');
-            throw new Horde_Imsp_Exception('The IMSP server did not understand your request.');
-        case 'OK':
-            $this->_imsp->_logger->debug('DELETE Completed successfully.');
+            case 'NO':
+                // Could not create abook.
+                $this->_imsp->_logger->err('IMSP server is unable to perform your request.');
+                throw new Horde_Imsp_Exception('IMSP server is unable to perform your request.');
+            case 'BAD':
+                $this->_imsp->_logger->err('The IMSP server did not understand your request.');
+                throw new Horde_Imsp_Exception('The IMSP server did not understand your request.');
+            case 'OK':
+                $this->_imsp->_logger->debug('DELETE Completed successfully.');
         }
     }
 
@@ -563,13 +564,13 @@ class Horde_Imsp_Book
         $server_response = $this->_imsp->receive();
         do {
             switch ($server_response) {
-            case 'NO':
-                // Could not create abook.
-                $this->_imsp->_logger->err('IMSP server is unable to perform your request.');
-                throw new Horde_Imsp_Exception('IMSP server is unable to perform your request.');
-            case 'BAD':
-                $this->_imsp->_logger->err('The IMSP server did not understand your request.');
-                throw new Horde_Imsp_Exception('The IMSP server did not understand your request.');
+                case 'NO':
+                    // Could not create abook.
+                    $this->_imsp->_logger->err('IMSP server is unable to perform your request.');
+                    throw new Horde_Imsp_Exception('IMSP server is unable to perform your request.');
+                case 'BAD':
+                    $this->_imsp->_logger->err('The IMSP server did not understand your request.');
+                    throw new Horde_Imsp_Exception('The IMSP server did not understand your request.');
             }
 
             //Check to see if this is a FETCHADDRESS resonse
@@ -610,7 +611,7 @@ class Horde_Imsp_Book
         $this->_imsp->send("$abook ", false, false);
         //How bout for entry name?
         if (preg_match(Horde_Imsp_Client_Base::MUST_USE_LITERAL, $bookEntry)) {
-            $biEntry=sprintf("{%d}", strlen($bookEntry));
+            $biEntry = sprintf("{%d}", strlen($bookEntry));
             $this->_imsp->send($biEntry, false, true, true);
             $this->_imsp->send($bookEntry, false, true);
         } else {
@@ -619,15 +620,15 @@ class Horde_Imsp_Book
         }
         $response = $this->_imsp->receive();
         switch ($response) {
-        case 'NO':
-            // Could not create abook.
-            $this->_imsp->_logger->err('IMSP server is unable to perform your request.');
-            throw new Horde_Imsp_Exception('IMSP server is unable to perform your request.');
-        case 'BAD':
-            $this->_imsp->_logger->err('The IMSP server did not understand your request.');
-            throw new Horde_Imsp_Exception('The IMSP server did not understand your request.');
-        case 'OK':
-            $this->_imsp->_logger->debug("UNLOCK ADDRESSBOOK on $abook $bookEntry OK");
+            case 'NO':
+                // Could not create abook.
+                $this->_imsp->_logger->err('IMSP server is unable to perform your request.');
+                throw new Horde_Imsp_Exception('IMSP server is unable to perform your request.');
+            case 'BAD':
+                $this->_imsp->_logger->err('The IMSP server did not understand your request.');
+                throw new Horde_Imsp_Exception('The IMSP server did not understand your request.');
+            case 'OK':
+                $this->_imsp->_logger->debug("UNLOCK ADDRESSBOOK on $abook $bookEntry OK");
         }
     }
 
@@ -685,20 +686,20 @@ class Horde_Imsp_Book
         $this->_imsp->send($acl, false, true);
         $response = $this->_imsp->receive();
         switch ($response) {
-        case 'NO':
-            // Could not create abook.
-            $this->_imsp->_logger->err('IMSP server is unable to perform your request.');
-            throw new Horde_Imsp_Exception('IMSP server is unable to perform your request.');
-        case 'BAD':
-            $this->_imsp->_logger->err('The IMSP server did not understand your request.');
-            throw new Horde_Imsp_Exception('The IMSP server did not understand your request.');
-        case 'OK':
-            $this->_imsp->_logger->debug("ACL set for $ident on $abook");
-            break;
-        default:
-            // Do not know why we would make it down here.
-            $this->_imsp->_logger->err('Did not receive the expected response from the server.');
-            throw new Horde_Imsp_Exception('Did not receive the expected response from the server.');
+            case 'NO':
+                // Could not create abook.
+                $this->_imsp->_logger->err('IMSP server is unable to perform your request.');
+                throw new Horde_Imsp_Exception('IMSP server is unable to perform your request.');
+            case 'BAD':
+                $this->_imsp->_logger->err('The IMSP server did not understand your request.');
+                throw new Horde_Imsp_Exception('The IMSP server did not understand your request.');
+            case 'OK':
+                $this->_imsp->_logger->debug("ACL set for $ident on $abook");
+                break;
+            default:
+                // Do not know why we would make it down here.
+                $this->_imsp->_logger->err('Did not receive the expected response from the server.');
+                throw new Horde_Imsp_Exception('Did not receive the expected response from the server.');
         }
     }
 
@@ -724,13 +725,13 @@ class Horde_Imsp_Book
         // Get results.
         $response = $this->_imsp->receive();
         switch ($response) {
-        case 'NO':
-            // Could not create abook.
-            $this->_imsp->_logger->err('IMSP server is unable to perform your request.');
-            throw new Horde_Imsp_Exception('IMSP server is unable to perform your request.');
-        case 'BAD':
-            $this->_imsp->_logger->err('The IMSP server did not understand your request.');
-            throw new Horde_Imsp_Exception('The IMSP server did not understand your request.');
+            case 'NO':
+                // Could not create abook.
+                $this->_imsp->_logger->err('IMSP server is unable to perform your request.');
+                throw new Horde_Imsp_Exception('IMSP server is unable to perform your request.');
+            case 'BAD':
+                $this->_imsp->_logger->err('The IMSP server did not understand your request.');
+                throw new Horde_Imsp_Exception('The IMSP server did not understand your request.');
         }
 
         // If we are here, we need to receive the * ACL Responses.
@@ -767,7 +768,7 @@ class Horde_Imsp_Book
             }
 
             for ($i = $firstACLIdx; $i < count($parts); $i += 2) {
-                $results[$parts[$i]] = $parts[$i+1];
+                $results[$parts[$i]] = $parts[$i + 1];
             }
 
             $response = $this->_imsp->receive();
@@ -792,7 +793,7 @@ class Horde_Imsp_Book
      *
      * @throws Horde_Imsp_Exception
      */
-    function deleteACL($abook, $ident)
+    public function deleteACL($abook, $ident)
     {
         $this->_imsp->send('DELETEACL ADDRESSBOOK ', true, false);
 
@@ -815,17 +816,18 @@ class Horde_Imsp_Book
         // Get results.
         $server_response = $this->_imsp->receive();
         switch ($server_response) {
-        case 'NO':
-            // Could not create abook.
-            $this->_imsp->_logger->err('IMSP server is unable to perform your request.');
-            throw new Horde_Imsp_Exception('IMSP server is unable to perform your request.');
-        case 'BAD':
-            $this->_imsp->_logger->err('The IMSP server did not understand your request.');
-            throw new Horde_Imsp_Exception('The IMSP server did not understand your request.');
-        case 'OK':
-            $this->_imsp->_logger->debug("DELETED ACL for $ident on $abook");
-        default:
-            throw new Horde_Imsp_Exception('Did not receive the expected response from the server.');
+            case 'NO':
+                // Could not create abook.
+                $this->_imsp->_logger->err('IMSP server is unable to perform your request.');
+                throw new Horde_Imsp_Exception('IMSP server is unable to perform your request.');
+            case 'BAD':
+                $this->_imsp->_logger->err('The IMSP server did not understand your request.');
+                throw new Horde_Imsp_Exception('The IMSP server did not understand your request.');
+            case 'OK':
+                $this->_imsp->_logger->debug("DELETED ACL for $ident on $abook");
+                // no break
+            default:
+                throw new Horde_Imsp_Exception('Did not receive the expected response from the server.');
         }
     }
 
@@ -847,13 +849,13 @@ class Horde_Imsp_Book
         $this->_imsp->send($abook, false, true);
         $server_response = $this->_imsp->receive();
         switch ($server_response) {
-        case 'NO':
-            // Could not create abook.
-            $this->_imsp->_logger->err('IMSP server is unable to perform your request.');
-            throw new Horde_Imsp_Exception('IMSP server is unable to perform your request.');
-        case 'BAD':
-            $this->_imsp->_logger->err('The IMSP server did not understand your request.');
-            throw new Horde_Imsp_Exception('The IMSP server did not understand your request.');
+            case 'NO':
+                // Could not create abook.
+                $this->_imsp->_logger->err('IMSP server is unable to perform your request.');
+                throw new Horde_Imsp_Exception('IMSP server is unable to perform your request.');
+            case 'BAD':
+                $this->_imsp->_logger->err('The IMSP server did not understand your request.');
+                throw new Horde_Imsp_Exception('The IMSP server did not understand your request.');
         }
 
         if (!preg_match("/^\* MYRIGHTS ADDRESSBOOK/", $server_response)) {
@@ -934,8 +936,11 @@ class Horde_Imsp_Book
          * value of the key as well. */
 
         // Was the address book name a  {}?
-        if (preg_match("/(^\* FETCHADDRESS )({)([0-9]{1,})(\}$)/",
-                       $server_response, $tempArray)) {
+        if (preg_match(
+            "/(^\* FETCHADDRESS )({)([0-9]{1,})(\}$)/",
+            $server_response,
+            $tempArray
+        )) {
             $abook = $this->_imsp->receiveStringLiteral($tempArray[3]);
             $chopped_response = trim($this->_imsp->receive());
         } else {
@@ -947,7 +952,7 @@ class Horde_Imsp_Book
         /* If addres book was sent as a {} then we must 'push' a blank
          * value to the start of this array so the rest of the routine
          * will work with the correct indexes. */
-         if (!empty($abook)) {
+        if (!empty($abook)) {
             array_unshift($parts, ' ');
         }
 
@@ -956,7 +961,7 @@ class Horde_Imsp_Book
         $name = $parts[0];
         $firstNameIdx = 1;
         $firstChar = substr($name, 0, 1);
-        if ($firstChar =="\"") {
+        if ($firstChar == "\"") {
             for ($i = 1; $i < $numOfParts; $i++) {
                 $lastChar = substr($parts[$i], strlen($parts[$i]) - 1, 1);
                 $firstNameIdx++;
@@ -968,7 +973,7 @@ class Horde_Imsp_Book
 
         // Now start working on the entry name
         $name = $parts[$firstNameIdx];
-        $firstChar = substr($name,0,1);
+        $firstChar = substr($name, 0, 1);
 
         // Check to see if the first char of the name string is a double quote
         // so we know if we have to extract more of the name.
@@ -976,7 +981,7 @@ class Horde_Imsp_Book
             $name = ltrim($name, "\"");
             for ($i = $firstNameIdx + 1; $i < $numOfParts; $i++) {
                 $name .=  ' ' . $parts[$i];
-                $lastChar = substr($parts[$i], strlen($parts[$i]) - 1,1);
+                $lastChar = substr($parts[$i], strlen($parts[$i]) - 1, 1);
                 if ($lastChar == "\"") {
                     $name = rtrim($name, "\"");
                     $nextKey = $i + 1;
@@ -984,10 +989,10 @@ class Horde_Imsp_Book
                 }
             }
 
-        // Check for {}
+            // Check for {}
         } elseif (preg_match('/\{(\d+)\}/', $name, $matches)) {
             $name = $this->_imsp->receiveStringLiteral($matches[1]);
-            $response=$this->_imsp->receive();
+            $response = $this->_imsp->receive();
             $parts = explode(' ', $response);
             $numOfParts = count($parts);
             $nextKey = 0;
@@ -1005,7 +1010,7 @@ class Horde_Imsp_Book
         for ($i = $nextKey; $i < $numOfParts; $i += 2) {
             $key = $parts[$i];
             /* Check for {} */
-            if (@preg_match(Horde_Imsp_Client_Base::OCTET_COUNT, $parts[$i+1], $tempArray)) {
+            if (@preg_match(Horde_Imsp_Client_Base::OCTET_COUNT, $parts[$i + 1], $tempArray)) {
                 $server_data = $this->_imsp->receiveStringLiteral($tempArray[2]);
                 $entry[$key] = $server_data;
 
@@ -1019,16 +1024,19 @@ class Horde_Imsp_Book
             } else {
                 // Not a string literal response
                 @$entry[$key] = $parts[$i + 1];
-                 // Check to see if the value started with a double
-                 // quote.  We also need to check if the last char is a
-                 // quote to make sure we REALLY have to check the next
-                 // elements for a closing quote.
+                // Check to see if the value started with a double
+                // quote.  We also need to check if the last char is a
+                // quote to make sure we REALLY have to check the next
+                // elements for a closing quote.
                 if ((@substr($parts[$i + 1], 0, 1) == '"') &&
-                    (substr($parts[$i + 1],
-                     strlen($parts[$i + 1]) - 1, 1) != '"')) {
+                    (substr(
+                        $parts[$i + 1],
+                        strlen($parts[$i + 1]) - 1,
+                        1
+                    ) != '"')) {
 
                     do {
-                        $nextElement = $parts[$i+2];
+                        $nextElement = $parts[$i + 2];
 
                         // Was this element the last one?
                         $lastChar = substr($nextElement, strlen($nextElement) - 1, 1);
@@ -1042,7 +1050,7 @@ class Horde_Imsp_Book
                             // Check to see if the next element is the
                             // last one. If so, the do loop will terminate.
                             $done = false;
-                            $lastChar = substr($parts[$i+3], strlen($parts[$i+3]) - 1,1);
+                            $lastChar = substr($parts[$i + 3], strlen($parts[$i + 3]) - 1, 1);
                             $i++;
                         }
                     } while ($lastChar != '"');
@@ -1050,7 +1058,7 @@ class Horde_Imsp_Book
                     // Do we need to add the final element, or were
                     // there only two total?
                     if (!$done) {
-                        $nextElement = $parts[$i+2];
+                        $nextElement = $parts[$i + 2];
                         $entry[$key] .= ' ' . $nextElement;
                         $i++;
                     }

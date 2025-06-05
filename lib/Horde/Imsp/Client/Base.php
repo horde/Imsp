@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The Horde_Imsp_Client base class.
  *
@@ -12,10 +13,9 @@
  */
 abstract class Horde_Imsp_Client_Base
 {
-
-    const OCTET_COUNT = '/({)([0-9]{1,})(\}$)/';
-    const MUST_USE_LITERAL = '/[\x80-\xFF\\r\\n\"\\\\]/';
-    const MUST_QUOTE = '/[\W]/i';
+    public const OCTET_COUNT = '/({)([0-9]{1,})(\}$)/';
+    public const MUST_USE_LITERAL = '/[\x80-\xFF\\r\\n\"\\\\]/';
+    public const MUST_QUOTE = '/[\W]/i';
 
     /**
      * String containing name/IP address of IMSP host.

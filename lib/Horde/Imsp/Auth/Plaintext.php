@@ -1,4 +1,5 @@
 <?php
+
 /**
  * IMSP authentication class for plaintext LOGIN authentication.
  *
@@ -26,8 +27,8 @@ class Horde_Imsp_Auth_Plaintext extends Horde_Imsp_Auth_Base
      */
     protected function _authenticate()
     {
-         $userId = $this->_params['username'];
-         $credentials = $this->_params['password'];
+        $userId = $this->_params['username'];
+        $credentials = $this->_params['password'];
 
         /* Start the command. */
         $this->_imsp->send('LOGIN ', true, false);
@@ -67,9 +68,9 @@ class Horde_Imsp_Auth_Plaintext extends Horde_Imsp_Auth_Base
      *
      * @return string the type of this IMSP_Auth driver
      */
-     public function getDriverType()
-     {
-         return 'plaintext';
-     }
+    public function getDriverType()
+    {
+        return 'plaintext';
+    }
 
 }

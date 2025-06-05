@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The Horde_Imsp_Client base class.
  *
